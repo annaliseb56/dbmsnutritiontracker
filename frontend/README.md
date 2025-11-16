@@ -24,6 +24,7 @@ Local:   http://localhost:5173/
 
 
 Open that URL in your browser.
+---
 ## What You Should See
 The frontend should display a simple page that:
 
