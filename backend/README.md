@@ -18,6 +18,7 @@ From the **repo root**:
 cd backend
 npm install        # install dependencies (Express, CORS, nodemon, etc.)
 npm run dev        # start backend in dev mode
+```
 
 You should see something like:
 Backend API listening on http://localhost:4000
@@ -29,5 +30,3 @@ http://localhost:4000/api/health
 http://localhost:4000/api/exercises
 http://localhost:4000/api/meals
 If those endpoints return JSON, the backend is working correctly.
-
-You can save that as `backend/README.md` so your teammates know exactly how to get just the API running.
