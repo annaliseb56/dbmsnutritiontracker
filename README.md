@@ -1,22 +1,37 @@
 # DBMS Nutrition Tracker
 
-Simple full-stack app for our DBMS project.
+Full-stack web app for our DBMS project.
 
-- **Backend:** Node.js + Express (currently using in-memory fake data; DB will be wired in later)
-- **Frontend:** React (Vite) that calls our backend API
-- **Goal:** Track exercises and meals; later connect to a real database + analytics.
+- **Backend:** Python + Flask (simple API with in-memory data for now)
+- **Frontend:** React (Vite) calling the Flask API
+- **Goal:** Track exercises and meals, then later plug into a real relational database and analytics layer.
 
 ---
 
-## 1. Prerequisites
+## Tech Stack
 
-Make sure you have:
+- **Backend**
+  - Python 3
+  - Flask
+  - Flask-CORS
+- **Frontend**
+  - React
+  - Vite
+  - npm / Node.js
 
-- **Node.js** (v18+ recommended)
-- **npm**
+---
 
-Check with:
+## Project Structure
 
-```bash
-node -v
-npm -v
+```text
+dbmsnutritiontracker/  (or fitness-app/)
+  backend/             # Flask API (Python)
+    app.py
+    requirements.txt   # generated with pip freeze (optional)
+    .venv/             # local virtualenv (not committed)
+  frontend/            # React SPA (Vite)
+    package.json
+    vite.config.js
+    src/
+      App.jsx
+      main.jsx
