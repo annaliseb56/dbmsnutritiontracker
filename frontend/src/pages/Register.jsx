@@ -6,10 +6,32 @@ export default function Login() {
   const [name, setName] = useState("");
   const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
-  
-  
-  
+  const [error, setError] = useState("");
 
+  async function handleLoginAttempt(e) {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+        method:"POST",
+        credentials: "include",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({username, name, dob, password})
+      });
+      
+      const data = await res.json();
+
+      if(!res.ok) { //Not somthing like 400
+        setError(data.error || "Registration Failed");
+        return;
+      }
+
+      window.location.href = "/account";
+    } catch (err) {
+      setError("Likely could not connect with backend, check backend running and .env")
+    }
+  }
+  
   return (
     <div className="min-h-screen flex items-center justify-center"
          style={{ backgroundColor: colors.sage }}>
@@ -22,8 +44,10 @@ export default function Login() {
             Register
         </h1>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleLoginAttempt}>
           
+          {error && (<p className="text-red-600 text-center">{error}</p>)}
+
           <input
             type="username"
             placeholder="username"

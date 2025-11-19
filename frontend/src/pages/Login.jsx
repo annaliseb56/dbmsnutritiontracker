@@ -1,9 +1,35 @@
 import { useState } from "react";
 import colors from "../theme/colors";
 
+
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  async function handleLoginAttempt(e) {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({username, password})
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Login failed");
+        return;
+      }
+
+      window.location.href = "/account";
+    } catch (err) {
+      setError("Likely could not connect with backend, check backend running and .env");
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center"
@@ -17,8 +43,10 @@ export default function Login() {
           Login
         </h1>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleLoginAttempt}>
           
+          {error && (<p className="text-red-600 text-center">{error}</p>)}          
+
           <input
             type="username"
             placeholder="username"

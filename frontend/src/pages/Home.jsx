@@ -1,6 +1,7 @@
 import NLogo from "../components/NLogo"
 import colors from "../theme/colors"
 import { Link } from "react-router-dom"
+import Navbar from "../components/Navbar";
 
 {/**
   Inspiration for this home page, from figma make. Edited to be simpler and focus more
@@ -9,9 +10,15 @@ import { Link } from "react-router-dom"
 
 export default function App() {
 
+    const isLoggedIn = false;
+    const isSticky = false;
+
     return (
         //Whole
         <div className="min-h-screen" style={{ backgroundColor: colors.cream }}>
+
+            <Navbar isLoggedIn={isLoggedIn} isSticky={isSticky}/>
+
             {/*Main Section*/}
             <section
                 className="relative overflow-hidden"
@@ -27,41 +34,6 @@ export default function App() {
                 }}
             >
                 <div className="relative max-w-7xl mx-auto px-8">
-                    <header className="flex justify-between items-center py-4">
-                        <div className="flex items-center gap-3">
-                            {/*Logo Top*/}
-                            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: colors.sage }}>
-                                <NLogo className="w-6 h-6" color={colors.cream} />
-                            </div>
-                            {/*Name Top*/}
-                            <span className="text-2xl font-bold" style={{ color: colors.darkGreen }}>NutritionTrax</span>
-                        </div>
-                        {/*Buttons*/}
-                        <div className="flex gap-4">
-                            <Link to="/Login">
-                                <button
-                                    className="px-6 py-2.5 rounded-full font-semibold transition-all duration-300"
-                                    style={{
-                                        color: colors.darkGreen,
-                                        transition: 'all 0.3s',
-                                    }}
-                                    onMouseEnter={(e) => (e.currentTarget.style.outline = `2px solid ${colors.sage}`)}
-                                    onMouseLeave={(e) => (e.currentTarget.style.outline = 'none')}
-                                >
-                                    Sign In
-                                </button>
-                            </Link>
-                            <Link to="/register">
-                                <button
-                                    className="px-6 py-2.5 rounded-full font-semibold transition-all duration-300 hover:brightness-90"
-                                    style={{ backgroundColor: colors.sage, color: colors.cream }}
-                                >
-                                    Register
-                                </button>
-                            </Link>
-                        </div>
-                    </header>
-
                     <div className="max-w-3xl mx-auto text-center py-32">
                         <div className="space-y-8">
 

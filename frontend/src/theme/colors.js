@@ -6,6 +6,6 @@ const colors = {
     darkGreen: '#4A5E4A',
     textDark: '#2C3E2E',
     tan: '#e0dbcfff'
-}
+} //Color Scheme from figma make
 
 export default colors;
