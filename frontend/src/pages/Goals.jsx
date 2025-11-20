@@ -2,11 +2,11 @@ import Navbar from "../components/Navbar";
 import colors from "../theme/colors";
 
 
-export default function Meals() {
+export default function Goals() {
     const isLoggedIn = true;
     const isSticky = false;
 
     return (
-        <Navbar isLoggedIn={isLoggedIn} isSticky={isSticky}/>
+        <Navbar isLoggedIn={isLoggedIn} isSticky={isSticky} />
     );
 }

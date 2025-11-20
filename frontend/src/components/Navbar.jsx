@@ -1,39 +1,42 @@
 import NLogo from "./NLogo";
 import colors from "../theme/colors";
-import { Utensils, Dumbbell, Trophy, Users, User } from "lucide-react";
+import { Utensils, Dumbbell, Trophy, Users, User, House} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const loggedInItems = [
-  { icon: Utensils, label: "Meals" },
-  { icon: Dumbbell, label: "Workout" },
-  { icon: Trophy, label: "Goals" },
-  { icon: Users, label: "Friends" },
+  { icon: Utensils, label: "Meals", to:"/meals"},
+  { icon: Dumbbell, label: "Workout", to:"/workout"},
+  { icon: Trophy, label: "Goals", to:"/goals"},
+  { icon: Users, label: "Friends", to:"/friends"},
 ];
 
 const LoggedInLinks = () => (
   <div className="hidden md:flex items-center">
     <div className="flex items-center gap-2 mr-10">
       {loggedInItems.map((item) => (
-        <button
-          key={item.label}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition hover:shadow-sm"
-          style={{
-            backgroundColor: colors.cream,
-            border: `1px solid ${colors.lightGreen}`,
-            color: colors.textDark,
-          }}
-        >
-          <item.icon className="w-4 h-4" />
-          {item.label}
-        </button>
+        <Link to={item.to} key={item.label}>
+          <button
+            key={item.label}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition hover:shadow-sm"
+            style={{
+              backgroundColor: colors.cream,
+              border: `1px solid ${colors.lightGreen}`,
+              color: colors.textDark,
+            }}
+          >
+            <item.icon className="w-4 h-4" />
+            {item.label}
+          </button>
+        </Link>
       ))}
     </div>
-    <div
-      className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer shadow-sm"
-      style={{ backgroundColor: colors.sage, color: colors.cream }}
-    >
-      <User className="w-5 h-5" />
-    </div>
+    <Link to="/account">
+      <button
+        className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer shadow-sm"
+        style={{ backgroundColor: colors.sage, color: colors.cream }}>
+          <House className="w-5 h-5" />
+      </button>
+    </Link>
   </div>
 );
 
