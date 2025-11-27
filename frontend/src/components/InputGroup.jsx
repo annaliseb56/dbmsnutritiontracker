@@ -4,7 +4,8 @@ export default function InputGroup({
   label,
   Icon,
   type = "text",
-  defaultValue = "",
+  value = "",
+  onChange,
   unit
 }) {
   return (
@@ -14,13 +15,14 @@ export default function InputGroup({
       </label>
 
       <div
-        className="flex items-center gap-3 px-4 py-3 rounded-xl border bg-white"
+        className="flex items-center gap-3 px-4 py-3 rounded-xl border-2 bg-white"
         style={{ borderColor: colors.lightGreen }}
       >
         <Icon className="w-5 h-5 opacity-70" style={{ color: colors.sage }} />
         <input
           type={type}
-          defaultValue={defaultValue}
+          value={value}
+          onChange={onChange}
           className="flex-1 outline-none"
         />
         {unit && (

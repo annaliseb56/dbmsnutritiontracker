@@ -30,4 +30,5 @@ frontend/.env
 logs/
 *.log
 
+backend/db
 

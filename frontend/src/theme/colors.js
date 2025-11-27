@@ -1,11 +1,11 @@
 const colors = {
-    cream: '#FAF7F0',
-    mint: '#E8F5E9',
-    lightGreen: '#C8E6C9',
-    sage: '#8BA887',
-    darkGreen: '#4A5E4A',
-    textDark: '#2C3E2E',
+    cream: '#faf7f0',
+    mint: '#e8f5e9',
+    lightGreen: '#c8e6c9',
+    sage: '#8ba887',
+    darkGreen: '#4a5e4a',
+    textDark: '#2c3e2e',
     tan: '#e0dbcfff'
-} //Color Scheme from figma make
+} //color scheme from figma make
 
 export default colors;

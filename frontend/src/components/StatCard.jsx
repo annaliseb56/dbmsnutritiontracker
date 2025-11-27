@@ -3,7 +3,7 @@ import colors from "../theme/colors";
 export default function StatCard({ icon: Icon, iconBg, iconColor, value, label }) {
     return (
         <div
-            className="p-5 rounded-2xl shadow-sm border flex flex-col gap-3"
+            className="p-5 rounded-2xl shadow-sm border-2 flex flex-col gap-3"
             style={{ borderColor: colors.lightGreen, backgroundColor: "white" }}
         >
             <div
