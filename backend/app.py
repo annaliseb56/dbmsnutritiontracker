@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from routes import auth, account_bp, meal_bp
+from routes import auth, account_bp, meal_bp, workout_bp, exercise_bp  
 import os
 from dotenv import load_dotenv
 from config import Config
@@ -18,6 +18,8 @@ def create_app():
     app.register_blueprint(auth)
     app.register_blueprint(account_bp)
     app.register_blueprint(meal_bp)
+    app.register_blueprint(workout_bp)
+    app.register_blueprint(exercise_bp)
     
     return app
 
