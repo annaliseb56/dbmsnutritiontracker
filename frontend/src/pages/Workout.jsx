@@ -3,11 +3,10 @@ import Navbar from "../components/Navbar";
 import LogoutButton from "../components/LogoutButton";
 import AddExerciseModal from "../components/AddExerciseModal";
 import ManageExerciseModal from "../components/ManageExercisesModal";
-import colors from "../theme/colors";
-
+import CreateWorkoutModal from "../components/CreateWorkoutModal";
 import LogWorkoutModal from "../components/LogWorkoutModal";
 import ManageWorkoutModal from "../components/ManageWorkoutModal";
-import CreateWorkoutModal from "../components/CreateWorkoutModal";
+import colors from "../theme/colors";
 
 export default function Workout() {
   const isLoggedIn = true;
@@ -15,8 +14,6 @@ export default function Workout() {
 
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openManageModal, setOpenManageModal] = useState(false);
-
-  // Workout modals
   const [openLogWorkout, setOpenLogWorkout] = useState(false);
   const [openManageWorkout, setOpenManageWorkout] = useState(false);
   const [openCreateWorkout, setOpenCreateWorkout] = useState(false);
@@ -34,7 +31,9 @@ export default function Workout() {
   `;
 
   const [subcategoriesByCategory, setSubcategoriesByCategory] = useState({});
+  const [allExercises, setAllExercises] = useState([]);
 
+  // Load exercise subcategories
   useEffect(() => {
     async function loadSubcats() {
       try {
@@ -47,17 +46,33 @@ export default function Workout() {
         console.error("Failed to load subcategories:", err);
       }
     }
-
     loadSubcats();
   }, []);
 
+  // Load exercises when the Create Workout modal opens
+  useEffect(() => {
+    if (!openCreateWorkout) return;
+
+    async function loadExercises() {
+      try {
+        const res = await fetch("http://localhost:5000/exercises/search", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        setAllExercises(data.exercises || []);
+      } catch (err) {
+        console.error("Failed to load exercises:", err);
+      }
+    }
+
+    loadExercises();
+  }, [openCreateWorkout]);
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.lightGreen }}>
-      {/* Navbar */}
       <Navbar isLoggedIn={isLoggedIn} isSticky={isSticky} />
 
       <main className="max-w-4xl mx-auto p-6 space-y-8">
-        {/* Title */}
         <h1 className="text-3xl font-bold text-center" style={{ color: colors.textDark }}>
           Workouts
         </h1>
@@ -93,13 +108,21 @@ export default function Workout() {
             Workouts
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <button
               className={buttonClass + " w-full"}
               disabled={isAnyModalOpen}
               onClick={() => setOpenLogWorkout(true)}
             >
-              View Logged Workout
+              Log Workout
+            </button>
+
+            <button
+              className={buttonClass + " w-full"}
+              disabled={isAnyModalOpen}
+              onClick={() => setOpenManageWorkout(true)}
+            >
+              Manage Workouts
             </button>
 
             <button
@@ -107,7 +130,7 @@ export default function Workout() {
               disabled={isAnyModalOpen}
               onClick={() => setOpenCreateWorkout(true)}
             >
-              Log new Workout
+              Create New Workout
             </button>
           </div>
         </div>
@@ -117,34 +140,30 @@ export default function Workout() {
         <LogoutButton />
       </div>
 
-      {/* Exercise MODALS */}
+      {/* Modals */}
       <AddExerciseModal
         isOpen={openAddModal}
         onClose={() => setOpenAddModal(false)}
         subcategoriesByCategory={subcategoriesByCategory}
       />
-
       <ManageExerciseModal
         isOpen={openManageModal}
         onClose={() => setOpenManageModal(false)}
         subcategoriesByCategory={subcategoriesByCategory}
       />
-
-      {/* Workout Modals */}
       <LogWorkoutModal
         isOpen={openLogWorkout}
         onClose={() => setOpenLogWorkout(false)}
       />
-
       <ManageWorkoutModal
         isOpen={openManageWorkout}
         onClose={() => setOpenManageWorkout(false)}
       />
-
       <CreateWorkoutModal
         isOpen={openCreateWorkout}
         onClose={() => setOpenCreateWorkout(false)}
+        exercises={allExercises}
       />
-    </div >
+    </div>
   );
 }

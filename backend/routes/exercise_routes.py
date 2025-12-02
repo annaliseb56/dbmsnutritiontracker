@@ -21,16 +21,16 @@ def compute_auto_kcal(cur, name, category_str):
 
     # Cardio: try to match with global exercises first
     cur.execute("""
-        SELECT kcal_per_kg
+        SELECT calories_per_kg
         FROM exercises
-        WHERE user_id IS NULL AND name ILIKE %s
-        ORDER BY LENGTH(name) ASC
+        WHERE user_id IS NULL AND exercise_key ILIKE %s
+        ORDER BY LENGTH(exercise_key) ASC
         LIMIT 1;
     """, (f"%{name}%",))
     match = cur.fetchone()
 
     if match:
-        return match["kcal_per_kg"]
+        return match["calories_per_kg"]
 
     # Fallback for generic cardio
     return CARDIO_MET
