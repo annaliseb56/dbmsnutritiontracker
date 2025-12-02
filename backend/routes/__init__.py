@@ -5,3 +5,4 @@ from .workout_routes import workout_bp
 from .exercise_routes import exercise_bp
 from .loggedworkout_routes import logged_workout_bp
 from .goal_routes import goal_bp
+from .friend_routes import friend_bp
