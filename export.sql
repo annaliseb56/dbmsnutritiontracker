@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict ekKGlDjm4qgdl8FBKSc8JMUZo1sdu0r7hXCO21Ii1OeoJddOEp5EyTz7qfYqgTG
+\restrict dkvqzbVf6NN3fuGsg8YSaHiz7yfYKkCjROniUng0VLnWek3xI2QLgUsN3qPnT1X
 
 -- Dumped from database version 16.10 (Ubuntu 16.10-0ubuntu0.24.04.1)
 -- Dumped by pg_dump version 17.7 (Ubuntu 17.7-3.pgdg24.04+1)
@@ -19,81 +19,12 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE IF EXISTS ONLY public.workouts DROP CONSTRAINT IF EXISTS workouts_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.workout_exercises DROP CONSTRAINT IF EXISTS workout_exercises_workout_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.workout_exercises DROP CONSTRAINT IF EXISTS workout_exercises_exercise_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.progress_tracking DROP CONSTRAINT IF EXISTS progress_tracking_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.progress_tracking DROP CONSTRAINT IF EXISTS progress_tracking_goal_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.meals DROP CONSTRAINT IF EXISTS meals_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.meals DROP CONSTRAINT IF EXISTS meals_parent_meal_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.meal_foods DROP CONSTRAINT IF EXISTS meal_foods_meal_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.meal_foods DROP CONSTRAINT IF EXISTS meal_foods_food_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.goals DROP CONSTRAINT IF EXISTS goals_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.goals DROP CONSTRAINT IF EXISTS goals_created_by_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.goals DROP CONSTRAINT IF EXISTS goals_challenged_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.goal_metrics DROP CONSTRAINT IF EXISTS goal_metrics_goal_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.friends DROP CONSTRAINT IF EXISTS friends_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.friends DROP CONSTRAINT IF EXISTS friends_friend_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.food DROP CONSTRAINT IF EXISTS food_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.exercises DROP CONSTRAINT IF EXISTS exercises_user_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_subcategory_links DROP CONSTRAINT IF EXISTS exercise_subcategory_links_subcategory_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_subcategory_links DROP CONSTRAINT IF EXISTS exercise_subcategory_links_exercise_id_fkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_subcategories DROP CONSTRAINT IF EXISTS exercise_subcategories_category_id_fkey;
-DROP INDEX IF EXISTS public.idx_goals_created_by_user;
-DROP INDEX IF EXISTS public.idx_goals_challenged_user;
-DROP INDEX IF EXISTS public.idx_goals_challenge_status;
-DROP INDEX IF EXISTS public.idx_friends_user_id;
-DROP INDEX IF EXISTS public.idx_friends_status;
-DROP INDEX IF EXISTS public.idx_friends_friend_id;
-ALTER TABLE IF EXISTS ONLY public.workouts DROP CONSTRAINT IF EXISTS workouts_pkey;
-ALTER TABLE IF EXISTS ONLY public.workout_exercises DROP CONSTRAINT IF EXISTS workout_exercises_pkey;
-ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_username_key;
-ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
-ALTER TABLE IF EXISTS ONLY public.progress_tracking DROP CONSTRAINT IF EXISTS progress_tracking_pkey;
-ALTER TABLE IF EXISTS ONLY public.meals DROP CONSTRAINT IF EXISTS meals_pkey;
-ALTER TABLE IF EXISTS ONLY public.meal_foods DROP CONSTRAINT IF EXISTS meal_foods_pkey;
-ALTER TABLE IF EXISTS ONLY public.goals DROP CONSTRAINT IF EXISTS goals_pkey;
-ALTER TABLE IF EXISTS ONLY public.goal_metrics DROP CONSTRAINT IF EXISTS goal_metrics_pkey;
-ALTER TABLE IF EXISTS ONLY public.friends DROP CONSTRAINT IF EXISTS friends_user_id_friend_id_key;
-ALTER TABLE IF EXISTS ONLY public.friends DROP CONSTRAINT IF EXISTS friends_pkey;
-ALTER TABLE IF EXISTS ONLY public.food DROP CONSTRAINT IF EXISTS food_pkey;
-ALTER TABLE IF EXISTS ONLY public.exercises DROP CONSTRAINT IF EXISTS exercises_pkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_subcategory_links DROP CONSTRAINT IF EXISTS exercise_subcategory_links_pkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_subcategories DROP CONSTRAINT IF EXISTS exercise_subcategories_pkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_categories DROP CONSTRAINT IF EXISTS exercise_categories_pkey;
-ALTER TABLE IF EXISTS ONLY public.exercise_categories DROP CONSTRAINT IF EXISTS exercise_categories_name_key;
-ALTER TABLE IF EXISTS public.workouts ALTER COLUMN workout_id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.goal_metrics ALTER COLUMN metric_id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.friends ALTER COLUMN friendship_id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.exercises ALTER COLUMN exercise_id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.exercise_subcategories ALTER COLUMN subcategory_id DROP DEFAULT;
-ALTER TABLE IF EXISTS public.exercise_categories ALTER COLUMN category_id DROP DEFAULT;
-DROP SEQUENCE IF EXISTS public.workouts_workout_id_seq;
-DROP TABLE IF EXISTS public.workouts;
-DROP TABLE IF EXISTS public.workout_exercises;
-DROP TABLE IF EXISTS public.users;
-DROP TABLE IF EXISTS public.progress_tracking;
-DROP TABLE IF EXISTS public.meals;
-DROP TABLE IF EXISTS public.meal_foods;
-DROP TABLE IF EXISTS public.goals;
-DROP SEQUENCE IF EXISTS public.goal_metrics_metric_id_seq;
-DROP TABLE IF EXISTS public.goal_metrics;
-DROP SEQUENCE IF EXISTS public.friends_friendship_id_seq;
-DROP TABLE IF EXISTS public.friends;
-DROP TABLE IF EXISTS public.food;
-DROP SEQUENCE IF EXISTS public.exercises_exercise_id_seq;
-DROP TABLE IF EXISTS public.exercises;
-DROP TABLE IF EXISTS public.exercise_subcategory_links;
-DROP SEQUENCE IF EXISTS public.exercise_subcategories_subcategory_id_seq;
-DROP TABLE IF EXISTS public.exercise_subcategories;
-DROP SEQUENCE IF EXISTS public.exercise_categories_category_id_seq;
-DROP TABLE IF EXISTS public.exercise_categories;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: exercise_categories; Type: TABLE; Schema: public; Owner: -
+-- Name: exercise_categories; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.exercise_categories (
@@ -102,8 +33,10 @@ CREATE TABLE public.exercise_categories (
 );
 
 
+ALTER TABLE public.exercise_categories OWNER TO nutri;
+
 --
--- Name: exercise_categories_category_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: exercise_categories_category_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 CREATE SEQUENCE public.exercise_categories_category_id_seq
@@ -115,15 +48,17 @@ CREATE SEQUENCE public.exercise_categories_category_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.exercise_categories_category_id_seq OWNER TO nutri;
+
 --
--- Name: exercise_categories_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: exercise_categories_category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nutri
 --
 
 ALTER SEQUENCE public.exercise_categories_category_id_seq OWNED BY public.exercise_categories.category_id;
 
 
 --
--- Name: exercise_subcategories; Type: TABLE; Schema: public; Owner: -
+-- Name: exercise_subcategories; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.exercise_subcategories (
@@ -133,8 +68,10 @@ CREATE TABLE public.exercise_subcategories (
 );
 
 
+ALTER TABLE public.exercise_subcategories OWNER TO nutri;
+
 --
--- Name: exercise_subcategories_subcategory_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: exercise_subcategories_subcategory_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 CREATE SEQUENCE public.exercise_subcategories_subcategory_id_seq
@@ -146,15 +83,17 @@ CREATE SEQUENCE public.exercise_subcategories_subcategory_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.exercise_subcategories_subcategory_id_seq OWNER TO nutri;
+
 --
--- Name: exercise_subcategories_subcategory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: exercise_subcategories_subcategory_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nutri
 --
 
 ALTER SEQUENCE public.exercise_subcategories_subcategory_id_seq OWNED BY public.exercise_subcategories.subcategory_id;
 
 
 --
--- Name: exercise_subcategory_links; Type: TABLE; Schema: public; Owner: -
+-- Name: exercise_subcategory_links; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.exercise_subcategory_links (
@@ -163,8 +102,10 @@ CREATE TABLE public.exercise_subcategory_links (
 );
 
 
+ALTER TABLE public.exercise_subcategory_links OWNER TO nutri;
+
 --
--- Name: exercises; Type: TABLE; Schema: public; Owner: -
+-- Name: exercises; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.exercises (
@@ -177,8 +118,10 @@ CREATE TABLE public.exercises (
 );
 
 
+ALTER TABLE public.exercises OWNER TO nutri;
+
 --
--- Name: exercises_exercise_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: exercises_exercise_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 CREATE SEQUENCE public.exercises_exercise_id_seq
@@ -190,15 +133,17 @@ CREATE SEQUENCE public.exercises_exercise_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.exercises_exercise_id_seq OWNER TO nutri;
+
 --
--- Name: exercises_exercise_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: exercises_exercise_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nutri
 --
 
 ALTER SEQUENCE public.exercises_exercise_id_seq OWNED BY public.exercises.exercise_id;
 
 
 --
--- Name: food; Type: TABLE; Schema: public; Owner: -
+-- Name: food; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.food (
@@ -216,8 +161,10 @@ CREATE TABLE public.food (
 );
 
 
+ALTER TABLE public.food OWNER TO nutri;
+
 --
--- Name: food_food_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: food_food_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 ALTER TABLE public.food ALTER COLUMN food_id ADD GENERATED BY DEFAULT AS IDENTITY (
@@ -231,7 +178,7 @@ ALTER TABLE public.food ALTER COLUMN food_id ADD GENERATED BY DEFAULT AS IDENTIT
 
 
 --
--- Name: friends; Type: TABLE; Schema: public; Owner: -
+-- Name: friends; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.friends (
@@ -245,8 +192,10 @@ CREATE TABLE public.friends (
 );
 
 
+ALTER TABLE public.friends OWNER TO nutri;
+
 --
--- Name: friends_friendship_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: friends_friendship_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 CREATE SEQUENCE public.friends_friendship_id_seq
@@ -258,15 +207,17 @@ CREATE SEQUENCE public.friends_friendship_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.friends_friendship_id_seq OWNER TO nutri;
+
 --
--- Name: friends_friendship_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: friends_friendship_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nutri
 --
 
 ALTER SEQUENCE public.friends_friendship_id_seq OWNED BY public.friends.friendship_id;
 
 
 --
--- Name: goal_metrics; Type: TABLE; Schema: public; Owner: -
+-- Name: goal_metrics; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.goal_metrics (
@@ -278,8 +229,10 @@ CREATE TABLE public.goal_metrics (
 );
 
 
+ALTER TABLE public.goal_metrics OWNER TO nutri;
+
 --
--- Name: goal_metrics_metric_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: goal_metrics_metric_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 CREATE SEQUENCE public.goal_metrics_metric_id_seq
@@ -291,15 +244,17 @@ CREATE SEQUENCE public.goal_metrics_metric_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.goal_metrics_metric_id_seq OWNER TO nutri;
+
 --
--- Name: goal_metrics_metric_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: goal_metrics_metric_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nutri
 --
 
 ALTER SEQUENCE public.goal_metrics_metric_id_seq OWNED BY public.goal_metrics.metric_id;
 
 
 --
--- Name: goals; Type: TABLE; Schema: public; Owner: -
+-- Name: goals; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.goals (
@@ -319,8 +274,10 @@ CREATE TABLE public.goals (
 );
 
 
+ALTER TABLE public.goals OWNER TO nutri;
+
 --
--- Name: goals_goal_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: goals_goal_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 ALTER TABLE public.goals ALTER COLUMN goal_id ADD GENERATED BY DEFAULT AS IDENTITY (
@@ -334,7 +291,7 @@ ALTER TABLE public.goals ALTER COLUMN goal_id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- Name: meal_foods; Type: TABLE; Schema: public; Owner: -
+-- Name: meal_foods; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.meal_foods (
@@ -344,8 +301,10 @@ CREATE TABLE public.meal_foods (
 );
 
 
+ALTER TABLE public.meal_foods OWNER TO nutri;
+
 --
--- Name: meals; Type: TABLE; Schema: public; Owner: -
+-- Name: meals; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.meals (
@@ -358,8 +317,10 @@ CREATE TABLE public.meals (
 );
 
 
+ALTER TABLE public.meals OWNER TO nutri;
+
 --
--- Name: meals_meal_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: meals_meal_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 ALTER TABLE public.meals ALTER COLUMN meal_id ADD GENERATED BY DEFAULT AS IDENTITY (
@@ -373,7 +334,7 @@ ALTER TABLE public.meals ALTER COLUMN meal_id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- Name: progress_tracking; Type: TABLE; Schema: public; Owner: -
+-- Name: progress_tracking; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.progress_tracking (
@@ -386,8 +347,10 @@ CREATE TABLE public.progress_tracking (
 );
 
 
+ALTER TABLE public.progress_tracking OWNER TO nutri;
+
 --
--- Name: progress_tracking_tracking_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: progress_tracking_tracking_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 ALTER TABLE public.progress_tracking ALTER COLUMN tracking_id ADD GENERATED BY DEFAULT AS IDENTITY (
@@ -401,7 +364,7 @@ ALTER TABLE public.progress_tracking ALTER COLUMN tracking_id ADD GENERATED BY D
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: users; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.users (
@@ -414,8 +377,10 @@ CREATE TABLE public.users (
 );
 
 
+ALTER TABLE public.users OWNER TO nutri;
+
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED BY DEFAULT AS IDENTITY (
@@ -429,7 +394,7 @@ ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- Name: workout_exercises; Type: TABLE; Schema: public; Owner: -
+-- Name: workout_exercises; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.workout_exercises (
@@ -445,8 +410,10 @@ CREATE TABLE public.workout_exercises (
 );
 
 
+ALTER TABLE public.workout_exercises OWNER TO nutri;
+
 --
--- Name: workouts; Type: TABLE; Schema: public; Owner: -
+-- Name: workouts; Type: TABLE; Schema: public; Owner: nutri
 --
 
 CREATE TABLE public.workouts (
@@ -461,8 +428,10 @@ CREATE TABLE public.workouts (
 );
 
 
+ALTER TABLE public.workouts OWNER TO nutri;
+
 --
--- Name: workouts_workout_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: workouts_workout_id_seq; Type: SEQUENCE; Schema: public; Owner: nutri
 --
 
 CREATE SEQUENCE public.workouts_workout_id_seq
@@ -474,57 +443,59 @@ CREATE SEQUENCE public.workouts_workout_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.workouts_workout_id_seq OWNER TO nutri;
+
 --
--- Name: workouts_workout_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: workouts_workout_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: nutri
 --
 
 ALTER SEQUENCE public.workouts_workout_id_seq OWNED BY public.workouts.workout_id;
 
 
 --
--- Name: exercise_categories category_id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: exercise_categories category_id; Type: DEFAULT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_categories ALTER COLUMN category_id SET DEFAULT nextval('public.exercise_categories_category_id_seq'::regclass);
 
 
 --
--- Name: exercise_subcategories subcategory_id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: exercise_subcategories subcategory_id; Type: DEFAULT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_subcategories ALTER COLUMN subcategory_id SET DEFAULT nextval('public.exercise_subcategories_subcategory_id_seq'::regclass);
 
 
 --
--- Name: exercises exercise_id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: exercises exercise_id; Type: DEFAULT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercises ALTER COLUMN exercise_id SET DEFAULT nextval('public.exercises_exercise_id_seq'::regclass);
 
 
 --
--- Name: friends friendship_id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: friends friendship_id; Type: DEFAULT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.friends ALTER COLUMN friendship_id SET DEFAULT nextval('public.friends_friendship_id_seq'::regclass);
 
 
 --
--- Name: goal_metrics metric_id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: goal_metrics metric_id; Type: DEFAULT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goal_metrics ALTER COLUMN metric_id SET DEFAULT nextval('public.goal_metrics_metric_id_seq'::regclass);
 
 
 --
--- Name: workouts workout_id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: workouts workout_id; Type: DEFAULT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.workouts ALTER COLUMN workout_id SET DEFAULT nextval('public.workouts_workout_id_seq'::regclass);
 
 
 --
--- Data for Name: exercise_categories; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: exercise_categories; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.exercise_categories (category_id, name) FROM stdin;
@@ -538,7 +509,7 @@ COPY public.exercise_categories (category_id, name) FROM stdin;
 
 
 --
--- Data for Name: exercise_subcategories; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: exercise_subcategories; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.exercise_subcategories (subcategory_id, category_id, name) FROM stdin;
@@ -566,7 +537,7 @@ COPY public.exercise_subcategories (subcategory_id, category_id, name) FROM stdi
 
 
 --
--- Data for Name: exercise_subcategory_links; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: exercise_subcategory_links; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.exercise_subcategory_links (exercise_id, subcategory_id) FROM stdin;
@@ -830,7 +801,7 @@ COPY public.exercise_subcategory_links (exercise_id, subcategory_id) FROM stdin;
 
 
 --
--- Data for Name: exercises; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: exercises; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.exercises (exercise_id, exercise_key, exercise_type, calories_per_kg, user_id, category) FROM stdin;
@@ -1090,7 +1061,7 @@ COPY public.exercises (exercise_id, exercise_key, exercise_type, calories_per_kg
 
 
 --
--- Data for Name: food; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: food; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.food (food_id, description, calories, protein, carbs, total_fat, saturated_fat, cholesterol, sodium, sugar, user_id) FROM stdin;
@@ -1141,7 +1112,7 @@ COPY public.food (food_id, description, calories, protein, carbs, total_fat, sat
 
 
 --
--- Data for Name: friends; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: friends; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.friends (friendship_id, user_id, friend_id, status, created_at, updated_at) FROM stdin;
@@ -1151,7 +1122,7 @@ COPY public.friends (friendship_id, user_id, friend_id, status, created_at, upda
 
 
 --
--- Data for Name: goal_metrics; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: goal_metrics; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.goal_metrics (metric_id, goal_id, current_value, recorded_date, metric_unit) FROM stdin;
@@ -1174,7 +1145,7 @@ COPY public.goal_metrics (metric_id, goal_id, current_value, recorded_date, metr
 
 
 --
--- Data for Name: goals; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: goals; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.goals (goal_id, user_id, goal_type, date_added, goal_end_date, goal_complete, target_value, name, metric_type, challenged_user_id, challenge_status, created_by_user_id) FROM stdin;
@@ -1196,7 +1167,7 @@ COPY public.goals (goal_id, user_id, goal_type, date_added, goal_end_date, goal_
 
 
 --
--- Data for Name: meal_foods; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: meal_foods; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.meal_foods (meal_id, food_id, food_amount) FROM stdin;
@@ -1254,7 +1225,7 @@ COPY public.meal_foods (meal_id, food_id, food_amount) FROM stdin;
 
 
 --
--- Data for Name: meals; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: meals; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.meals (meal_id, user_id, meal_date, meal_type, meal_name, parent_meal_id) FROM stdin;
@@ -1293,7 +1264,7 @@ COPY public.meals (meal_id, user_id, meal_date, meal_type, meal_name, parent_mea
 
 
 --
--- Data for Name: progress_tracking; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: progress_tracking; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.progress_tracking (tracking_id, user_id, goal_id, height, weight, recorded_date) FROM stdin;
@@ -1328,7 +1299,7 @@ COPY public.progress_tracking (tracking_id, user_id, goal_id, height, weight, re
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.users (user_id, username, password, created_at, date_of_birth, nickname) FROM stdin;
@@ -1344,7 +1315,7 @@ COPY public.users (user_id, username, password, created_at, date_of_birth, nickn
 
 
 --
--- Data for Name: workout_exercises; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: workout_exercises; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.workout_exercises (workout_id, exercise_id, exercise_duration, sets, reps, weight, distance, incline, max_weight) FROM stdin;
@@ -1363,7 +1334,7 @@ COPY public.workout_exercises (workout_id, exercise_id, exercise_duration, sets,
 
 
 --
--- Data for Name: workouts; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: workouts; Type: TABLE DATA; Schema: public; Owner: nutri
 --
 
 COPY public.workouts (workout_id, user_id, name, notes, duration, workout_date, is_template, total_calories_burned) FROM stdin;
@@ -1377,84 +1348,84 @@ COPY public.workouts (workout_id, user_id, name, notes, duration, workout_date, 
 
 
 --
--- Name: exercise_categories_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: exercise_categories_category_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.exercise_categories_category_id_seq', 6, true);
 
 
 --
--- Name: exercise_subcategories_subcategory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: exercise_subcategories_subcategory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.exercise_subcategories_subcategory_id_seq', 25, true);
 
 
 --
--- Name: exercises_exercise_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: exercises_exercise_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.exercises_exercise_id_seq', 255, true);
 
 
 --
--- Name: food_food_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: food_food_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.food_food_id_seq', 43, true);
 
 
 --
--- Name: friends_friendship_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: friends_friendship_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.friends_friendship_id_seq', 4, true);
 
 
 --
--- Name: goal_metrics_metric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: goal_metrics_metric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.goal_metrics_metric_id_seq', 24, true);
 
 
 --
--- Name: goals_goal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: goals_goal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.goals_goal_id_seq', 25, true);
 
 
 --
--- Name: meals_meal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: meals_meal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.meals_meal_id_seq', 49, true);
 
 
 --
--- Name: progress_tracking_tracking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: progress_tracking_tracking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.progress_tracking_tracking_id_seq', 27, true);
 
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.users_user_id_seq', 11, true);
 
 
 --
--- Name: workouts_workout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: workouts_workout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: nutri
 --
 
 SELECT pg_catalog.setval('public.workouts_workout_id_seq', 28, true);
 
 
 --
--- Name: exercise_categories exercise_categories_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_categories exercise_categories_name_key; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_categories
@@ -1462,7 +1433,7 @@ ALTER TABLE ONLY public.exercise_categories
 
 
 --
--- Name: exercise_categories exercise_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_categories exercise_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_categories
@@ -1470,7 +1441,7 @@ ALTER TABLE ONLY public.exercise_categories
 
 
 --
--- Name: exercise_subcategories exercise_subcategories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_subcategories exercise_subcategories_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_subcategories
@@ -1478,7 +1449,7 @@ ALTER TABLE ONLY public.exercise_subcategories
 
 
 --
--- Name: exercise_subcategory_links exercise_subcategory_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_subcategory_links exercise_subcategory_links_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_subcategory_links
@@ -1486,7 +1457,7 @@ ALTER TABLE ONLY public.exercise_subcategory_links
 
 
 --
--- Name: exercises exercises_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: exercises exercises_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercises
@@ -1494,7 +1465,7 @@ ALTER TABLE ONLY public.exercises
 
 
 --
--- Name: food food_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: food food_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.food
@@ -1502,7 +1473,7 @@ ALTER TABLE ONLY public.food
 
 
 --
--- Name: friends friends_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: friends friends_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.friends
@@ -1510,7 +1481,7 @@ ALTER TABLE ONLY public.friends
 
 
 --
--- Name: friends friends_user_id_friend_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: friends friends_user_id_friend_id_key; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.friends
@@ -1518,7 +1489,7 @@ ALTER TABLE ONLY public.friends
 
 
 --
--- Name: goal_metrics goal_metrics_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: goal_metrics goal_metrics_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goal_metrics
@@ -1526,7 +1497,7 @@ ALTER TABLE ONLY public.goal_metrics
 
 
 --
--- Name: goals goals_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: goals goals_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goals
@@ -1534,7 +1505,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: meal_foods meal_foods_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: meal_foods meal_foods_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.meal_foods
@@ -1542,7 +1513,7 @@ ALTER TABLE ONLY public.meal_foods
 
 
 --
--- Name: meals meals_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: meals meals_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.meals
@@ -1550,7 +1521,7 @@ ALTER TABLE ONLY public.meals
 
 
 --
--- Name: progress_tracking progress_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: progress_tracking progress_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.progress_tracking
@@ -1558,7 +1529,7 @@ ALTER TABLE ONLY public.progress_tracking
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.users
@@ -1566,7 +1537,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.users
@@ -1574,7 +1545,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: workout_exercises workout_exercises_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: workout_exercises workout_exercises_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.workout_exercises
@@ -1582,7 +1553,7 @@ ALTER TABLE ONLY public.workout_exercises
 
 
 --
--- Name: workouts workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: workouts workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.workouts
@@ -1590,49 +1561,49 @@ ALTER TABLE ONLY public.workouts
 
 
 --
--- Name: idx_friends_friend_id; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_friends_friend_id; Type: INDEX; Schema: public; Owner: nutri
 --
 
 CREATE INDEX idx_friends_friend_id ON public.friends USING btree (friend_id);
 
 
 --
--- Name: idx_friends_status; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_friends_status; Type: INDEX; Schema: public; Owner: nutri
 --
 
 CREATE INDEX idx_friends_status ON public.friends USING btree (status);
 
 
 --
--- Name: idx_friends_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_friends_user_id; Type: INDEX; Schema: public; Owner: nutri
 --
 
 CREATE INDEX idx_friends_user_id ON public.friends USING btree (user_id);
 
 
 --
--- Name: idx_goals_challenge_status; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_goals_challenge_status; Type: INDEX; Schema: public; Owner: nutri
 --
 
 CREATE INDEX idx_goals_challenge_status ON public.goals USING btree (challenge_status);
 
 
 --
--- Name: idx_goals_challenged_user; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_goals_challenged_user; Type: INDEX; Schema: public; Owner: nutri
 --
 
 CREATE INDEX idx_goals_challenged_user ON public.goals USING btree (challenged_user_id);
 
 
 --
--- Name: idx_goals_created_by_user; Type: INDEX; Schema: public; Owner: -
+-- Name: idx_goals_created_by_user; Type: INDEX; Schema: public; Owner: nutri
 --
 
 CREATE INDEX idx_goals_created_by_user ON public.goals USING btree (created_by_user_id);
 
 
 --
--- Name: exercise_subcategories exercise_subcategories_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_subcategories exercise_subcategories_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_subcategories
@@ -1640,7 +1611,7 @@ ALTER TABLE ONLY public.exercise_subcategories
 
 
 --
--- Name: exercise_subcategory_links exercise_subcategory_links_exercise_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_subcategory_links exercise_subcategory_links_exercise_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_subcategory_links
@@ -1648,7 +1619,7 @@ ALTER TABLE ONLY public.exercise_subcategory_links
 
 
 --
--- Name: exercise_subcategory_links exercise_subcategory_links_subcategory_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: exercise_subcategory_links exercise_subcategory_links_subcategory_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercise_subcategory_links
@@ -1656,7 +1627,7 @@ ALTER TABLE ONLY public.exercise_subcategory_links
 
 
 --
--- Name: exercises exercises_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: exercises exercises_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.exercises
@@ -1664,7 +1635,7 @@ ALTER TABLE ONLY public.exercises
 
 
 --
--- Name: food food_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: food food_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.food
@@ -1672,7 +1643,7 @@ ALTER TABLE ONLY public.food
 
 
 --
--- Name: friends friends_friend_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: friends friends_friend_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.friends
@@ -1680,7 +1651,7 @@ ALTER TABLE ONLY public.friends
 
 
 --
--- Name: friends friends_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: friends friends_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.friends
@@ -1688,7 +1659,7 @@ ALTER TABLE ONLY public.friends
 
 
 --
--- Name: goal_metrics goal_metrics_goal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: goal_metrics goal_metrics_goal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goal_metrics
@@ -1696,7 +1667,7 @@ ALTER TABLE ONLY public.goal_metrics
 
 
 --
--- Name: goals goals_challenged_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: goals goals_challenged_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goals
@@ -1704,7 +1675,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: goals goals_created_by_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: goals goals_created_by_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goals
@@ -1712,7 +1683,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: goals goals_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: goals goals_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.goals
@@ -1720,7 +1691,7 @@ ALTER TABLE ONLY public.goals
 
 
 --
--- Name: meal_foods meal_foods_food_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: meal_foods meal_foods_food_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.meal_foods
@@ -1728,7 +1699,7 @@ ALTER TABLE ONLY public.meal_foods
 
 
 --
--- Name: meal_foods meal_foods_meal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: meal_foods meal_foods_meal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.meal_foods
@@ -1736,7 +1707,7 @@ ALTER TABLE ONLY public.meal_foods
 
 
 --
--- Name: meals meals_parent_meal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: meals meals_parent_meal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.meals
@@ -1744,7 +1715,7 @@ ALTER TABLE ONLY public.meals
 
 
 --
--- Name: meals meals_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: meals meals_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.meals
@@ -1752,7 +1723,7 @@ ALTER TABLE ONLY public.meals
 
 
 --
--- Name: progress_tracking progress_tracking_goal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: progress_tracking progress_tracking_goal_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.progress_tracking
@@ -1760,7 +1731,7 @@ ALTER TABLE ONLY public.progress_tracking
 
 
 --
--- Name: progress_tracking progress_tracking_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: progress_tracking progress_tracking_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.progress_tracking
@@ -1768,7 +1739,7 @@ ALTER TABLE ONLY public.progress_tracking
 
 
 --
--- Name: workout_exercises workout_exercises_exercise_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: workout_exercises workout_exercises_exercise_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.workout_exercises
@@ -1776,7 +1747,7 @@ ALTER TABLE ONLY public.workout_exercises
 
 
 --
--- Name: workout_exercises workout_exercises_workout_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: workout_exercises workout_exercises_workout_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.workout_exercises
@@ -1784,7 +1755,7 @@ ALTER TABLE ONLY public.workout_exercises
 
 
 --
--- Name: workouts workouts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: workouts workouts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: nutri
 --
 
 ALTER TABLE ONLY public.workouts
@@ -1795,5 +1766,5 @@ ALTER TABLE ONLY public.workouts
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ekKGlDjm4qgdl8FBKSc8JMUZo1sdu0r7hXCO21Ii1OeoJddOEp5EyTz7qfYqgTG
+\unrestrict dkvqzbVf6NN3fuGsg8YSaHiz7yfYKkCjROniUng0VLnWek3xI2QLgUsN3qPnT1X
 
