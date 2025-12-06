@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import { useEffect, useState } from "react";
 import NLogo from "../components/NLogo";
 import colors from "../theme/colors";
@@ -15,6 +16,13 @@ import {
   Calendar,
   Trophy
 } from "lucide-react";
+
+{/**
+  Used claude to help debug when deploying to production was having trouble with sessions and it would 
+  continually redirect me to login page even though I had a valid session token in my cookies. To fix the issue I had
+  to change nginx config file. 
+  */}
+
 
 export default function Account() {
   // Setup state variables
@@ -36,7 +44,7 @@ export default function Account() {
 
   useEffect(() => {
     // Fetch account data
-    fetch("http://localhost:5000/account", { credentials: "include" })
+    fetch(`${API_URL}/account`, { credentials: "include" })
       .then(res => res.json())
       .then(data => {
         if (data.error) {
@@ -56,7 +64,7 @@ export default function Account() {
       });
 
     // Fetch stats data
-    fetch("http://localhost:5000/account/stats", { credentials: "include" })
+    fetch("" + API_URL + "/account/stats", { credentials: "include" })
       .then(res => res.json())
       .then(data => {
         console.log("Stats response:", data);
@@ -84,7 +92,7 @@ export default function Account() {
     setSubmiting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/account/update", {
+      const res = await fetch("" + API_URL + "/account/update", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -107,7 +115,7 @@ export default function Account() {
   };
 
   const handleLogout = () => {
-    fetch("http://localhost:5000/auth/logout", { credentials: "include" })
+    fetch("" + API_URL + "/auth/logout", { credentials: "include" })
       .then(() => window.location.href = "/login");
   };
 

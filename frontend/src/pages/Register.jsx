@@ -1,6 +1,9 @@
 import { useState } from "react";
 import colors from "../theme/colors";
 
+{/**Used CHATGPT to help with the design of the website and ensure that all of the cards on the website were properly aligned. 
+    Additionally, used it to help ensure the modals are working as intended. */}
+
 export default function Register() {
   const [username, setUsername] = useState("");
   const [dob, setDob] = useState("");

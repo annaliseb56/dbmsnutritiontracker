@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState } from "react";
 import ModalOverlay from "./ModalOverlay";
 
@@ -44,7 +45,7 @@ export default function CreateWorkoutModal({ isOpen, onClose, exercises }) {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/workouts", {
+      const res = await fetch("" + API_URL + "/workouts", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

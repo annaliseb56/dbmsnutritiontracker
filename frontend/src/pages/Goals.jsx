@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import LogoutButton from "../components/LogoutButton";
@@ -5,13 +6,16 @@ import colors from "../theme/colors";
 import GoalCard from "../components/goals/GoalCard";
 import AddGoalModal from "../components/goals/AddGoalModal";
 
+{/**Used CHATGPT to help with the design of the website and ensure that all of the cards on the website were properly aligned. 
+    Additionally, used it to help ensure the modals are working as intended. */}
+
 export default function Goals() {
     const [goals, setGoals] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:5000/goals", { credentials: "include" })
+        fetch("" + API_URL + "/goals", { credentials: "include" })
             .then((res) => res.json())
             .then((data) => setGoals(data.goals || []))
             .catch((err) => console.error(err));
@@ -19,7 +23,7 @@ export default function Goals() {
 
     const handleAddGoal = async (newGoal) => {
         try {
-            const res = await fetch("http://localhost:5000/goals", {
+            const res = await fetch("" + API_URL + "/goals", {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -36,7 +40,7 @@ export default function Goals() {
 
     const logProgress = async (goalId, currentValue, metricUnit) => {
         try {
-            const res = await fetch(`http://localhost:5000/goals/${goalId}/progress`, {
+            const res = await fetch(`" + API_URL + "/goals/${goalId}/progress`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -62,7 +66,7 @@ export default function Goals() {
 
     const completeGoal = async (goalId) => {
         try {
-            const res = await fetch(`http://localhost:5000/goals/${goalId}/complete`, {
+            const res = await fetch(`" + API_URL + "/goals/${goalId}/complete`, {
                 method: "POST",
                 credentials: "include",
             });
@@ -82,7 +86,7 @@ export default function Goals() {
 
     const cancelGoal = async (goalId) => {
         try {
-            const res = await fetch(`http://localhost:5000/goals/${goalId}/cancel`, {
+            const res = await fetch(`" + API_URL + "/goals/${goalId}/cancel`, {
                 method: "POST",
                 credentials: "include",
             });

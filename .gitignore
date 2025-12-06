@@ -31,4 +31,5 @@ logs/
 *.log
 
 backend/db
+update-api-urls.sh
 

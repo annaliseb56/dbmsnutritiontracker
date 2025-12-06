@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState, useEffect } from "react";
 import ModalOverlay from "./ModalOverlay";
 
@@ -14,7 +15,7 @@ export default function ManageWorkoutModal({ isOpen, onClose }) {
   // Load workouts when modal opens or search changes
   useEffect(() => {
     if (!isOpen) return;
-    fetch(`http://localhost:5000/workouts?search=${encodeURIComponent(searchQuery)}`, { credentials: "include" })
+    fetch(`" + API_URL + "/workouts?search=${encodeURIComponent(searchQuery)}`, { credentials: "include" })
       .then(res => res.json())
       .then(data => setWorkouts(data.workouts || []))
       .catch(err => console.error(err));
@@ -23,7 +24,7 @@ export default function ManageWorkoutModal({ isOpen, onClose }) {
   // Load all exercises when modal opens
   useEffect(() => {
     if (!isOpen) return;
-    fetch("http://localhost:5000/exercises/search", { credentials: "include" })
+    fetch("" + API_URL + "/exercises/search", { credentials: "include" })
       .then(res => res.json())
       .then(data => setAllExercises(data.exercises || []))
       .catch(err => console.error(err));
@@ -31,7 +32,7 @@ export default function ManageWorkoutModal({ isOpen, onClose }) {
 
   // Load exercises for selected workout
   const loadWorkoutExercises = (workout) => {
-    fetch(`http://localhost:5000/workouts/${workout.workout_id}/exercises`, { credentials: "include" })
+    fetch(`" + API_URL + "/workouts/${workout.workout_id}/exercises`, { credentials: "include" })
       .then(res => res.json())
       .then(data => {
         setSelectedExercises(data.exercises || []);
@@ -63,7 +64,7 @@ export default function ManageWorkoutModal({ isOpen, onClose }) {
       remove_exercises: removedExercises,
     };
     try {
-      const res = await fetch(`http://localhost:5000/workouts/${selectedWorkout.workout_id}`, {
+      const res = await fetch(`" + API_URL + "/workouts/${selectedWorkout.workout_id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -85,7 +86,7 @@ export default function ManageWorkoutModal({ isOpen, onClose }) {
   const handleDelete = async () => {
     if (!selectedWorkout || !window.confirm("Delete this workout?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/workouts/${selectedWorkout.workout_id}`, {
+      const res = await fetch(`" + API_URL + "/workouts/${selectedWorkout.workout_id}`, {
         method: "DELETE",
         credentials: "include",
       });

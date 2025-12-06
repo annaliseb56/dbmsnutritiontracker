@@ -7,7 +7,10 @@ import FriendsList from "../components/friends/FriendsList";
 import SearchBar from "../components/friends/SearchBar";
 import LogoutButton from "../components/LogoutButton";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+{/**Used CHATGPT to help with the design of the website and ensure that all of the cards on the website were properly aligned. 
+    Additionally, used it to help ensure the modals are working as intended. Additionally basic design inspired by FIGMA Make design.*/}
+
+const API_URL = import.meta.env.VITE_API_URL || '" + API_URL + "';
 
 export default function Friends() {
     const isLoggedIn = true;

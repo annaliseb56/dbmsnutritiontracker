@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState, useEffect } from "react";
 import colors from "../theme/colors";
 
@@ -44,7 +45,7 @@ export default function LoggedWorkoutsCard({ onRefresh }) {
     const loadWorkouts = async () => {
         setLoading(true);
         try {
-            const res = await fetch("http://localhost:5000/logged-workouts", {
+            const res = await fetch("" + API_URL + "/logged-workouts", {
                 credentials: "include",
             });
             const data = await res.json();
@@ -68,7 +69,7 @@ export default function LoggedWorkoutsCard({ onRefresh }) {
         } else {
             try {
                 const res = await fetch(
-                    `http://localhost:5000/logged-workouts/${workout.workout_id}/exercises`,
+                    `" + API_URL + "/logged-workouts/${workout.workout_id}/exercises`,
                     {
                         credentials: "include",
                     }
@@ -91,7 +92,7 @@ export default function LoggedWorkoutsCard({ onRefresh }) {
         if (!window.confirm("Are you sure you want to delete this workout?")) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/logged-workouts/${workoutId}`, {
+            const res = await fetch(`" + API_URL + "/logged-workouts/${workoutId}`, {
                 method: "DELETE",
                 credentials: "include",
             });

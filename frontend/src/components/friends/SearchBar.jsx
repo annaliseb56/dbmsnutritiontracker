@@ -2,7 +2,7 @@ import { Search, UserPlus } from "lucide-react";
 import colors from "../../theme/colors";
 import { useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || '" + API_URL + "';
 
 export default function SearchBar({ onRequestSent }) {
   const [query, setQuery] = useState("");

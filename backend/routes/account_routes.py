@@ -4,6 +4,7 @@ import datetime
 from psycopg2.extras import RealDictCursor
 from utils.check_input import validate_nickname, validate_dob, validate_height, validate_weight
 
+
 #Create blueprint for Account routes
 account_bp = Blueprint('account', __name__)
 

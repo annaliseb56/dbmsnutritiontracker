@@ -2,7 +2,7 @@ import { User, UserMinus, Send } from "lucide-react";
 import colors from "../../theme/colors";
 import { useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || '" + API_URL + "';
 
 export default function FriendsList({ friends, onRemove, onChallengeSent }) {
   const [showChallengeModal, setShowChallengeModal] = useState(false);

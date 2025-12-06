@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import LogoutButton from "../components/LogoutButton";
@@ -9,6 +10,8 @@ import ManageWorkoutModal from "../components/ManageWorkoutModal";
 import LoggedWorkoutsCard from "../components/loggedWorkoutsCard";
 import colors from "../theme/colors";
 
+{/**Used CHATGPT to help with the design of the website and ensure that all of the cards on the website were properly aligned. 
+    Additionally, used it to help ensure the modals are working as intended. */}
 export default function Workout() {
   const isLoggedIn = true;
   const isSticky = false;
@@ -39,7 +42,7 @@ export default function Workout() {
   useEffect(() => {
     async function loadSubcats() {
       try {
-        const res = await fetch("http://localhost:5000/exercises/subcategories", {
+        const res = await fetch("" + API_URL + "/exercises/subcategories", {
           credentials: "include",
         });
         const data = await res.json();
@@ -57,7 +60,7 @@ export default function Workout() {
 
     async function loadExercises() {
       try {
-        const res = await fetch("http://localhost:5000/exercises/search", {
+        const res = await fetch("" + API_URL + "/exercises/search", {
           credentials: "include",
         });
         const data = await res.json();

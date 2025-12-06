@@ -1,9 +1,10 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState, useEffect } from "react";
 import ModalOverlay from "./ModalOverlay";
 
 {/**
   CHATGPT to was used to style the this modal. Additionally, it was used to setup routes
-  to the backend.
+  to the backend. Additionally was used to fix routes again when deploying. 
   */}
 
 export default function ManageExerciseModal({ isOpen, onClose, subcategoriesByCategory }) {
@@ -31,7 +32,7 @@ export default function ManageExerciseModal({ isOpen, onClose, subcategoriesByCa
       if (subcategoryId) query += `subcategory_id=${subcategoryId}&`;
 
       //send query to backend with credentials (for user verifcation)
-      const res = await fetch(`http://localhost:5000/exercises/search${query}`, {
+      const res = await fetch(`" + API_URL + "/exercises/search${query}`, {
         credentials: "include",
       });
 
@@ -100,7 +101,7 @@ export default function ManageExerciseModal({ isOpen, onClose, subcategoriesByCa
         kcal_per_kg: parseFloat(editKcal),
       };
 
-      const res = await fetch(`http://localhost:5000/exercises/edit/${editingExercise.exercise_id}`, {
+      const res = await fetch(`" + API_URL + "/exercises/edit/${editingExercise.exercise_id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -125,7 +126,7 @@ export default function ManageExerciseModal({ isOpen, onClose, subcategoriesByCa
   const deleteExercise = async (exercise_id) => {
     if (!window.confirm("Are you sure you want to delete this exercise?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/exercises/delete/${exercise_id}`, {
+      const res = await fetch(`" + API_URL + "/exercises/delete/${exercise_id}`, {
         method: "DELETE",
         credentials: "include",
       });

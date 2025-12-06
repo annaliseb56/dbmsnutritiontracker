@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import { LogOut } from "lucide-react";
 
 
@@ -6,7 +7,7 @@ export default function LogoutButton({ redirectUrl = "/" }) {
     const handleLogout = async () => {
     try {
         //Send a request to the logout backend
-        const res = await fetch("http://localhost:5000/logout", {
+        const res = await fetch("" + API_URL + "/logout", {
             method: "POST",
             headers: { "Content-Type": "application/json" },     
             credentials: "include",  

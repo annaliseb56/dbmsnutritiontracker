@@ -1,3 +1,5 @@
+
+{/**Used Chatgpt to help with this svg code. I was having trouble getting it to look like a netflix logo and so i used chatgpt to generate this svg code for me. */}
 export default function NLogo({ className = "w-6 h-6", color = "#8BA887" }) {
     return (
         <svg

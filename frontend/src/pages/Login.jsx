@@ -1,6 +1,7 @@
 import { useState } from "react";
 import colors from "../theme/colors";
 
+{/**Used FIGMA make to get a good template and design for the login page, could not test on mac or apple devices due to lack of access to them. */}
 
 export default function Login() {
   const [username, setUsername] = useState("");

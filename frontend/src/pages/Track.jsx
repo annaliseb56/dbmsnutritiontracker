@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import { useState, useEffect } from 'react';
 import {
     LineChart, Line, XAxis, YAxis,
@@ -5,8 +6,10 @@ import {
 } from 'recharts';
 import { CheckCircle2, TrendingUp, Flame } from 'lucide-react';
 import Navbar from '../components/Navbar';
-import colors from '../theme/colors';   // ✅ FIXED: now imported properly
+import colors from '../theme/colors';   
 
+{/**Used CHATGPT to help with the design of the website and ensure that all of the cards on the website were properly aligned. 
+    Additionally,used it to fix errors with design and charts.*/}
 export default function TrackPage() {
     const [selectedGraphs, setSelectedGraphs] = useState(['weight', 'calories', 'macros']);
     const [weightData, setWeightData] = useState([]);
@@ -29,7 +32,7 @@ export default function TrackPage() {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch('http://localhost:5000/track/data', {
+            const response = await fetch('" + API_URL + "/track/data', {
                 credentials: 'include'
             });
 
@@ -88,7 +91,6 @@ export default function TrackPage() {
 
     return (
         <div className="min-h-screen" style={{ backgroundColor: colors.lightGreen }}>
-            {/* ✅ NAVBAR AT TOP LIKE GOALS PAGE */}
             <Navbar isLoggedIn={true} isSticky={true} />
 
             <main className="max-w-5xl mx-auto p-6 space-y-10">

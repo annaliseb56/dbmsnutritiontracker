@@ -1,3 +1,4 @@
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 import React, { useState, useEffect } from "react";
 import ModalOverlay from "./ModalOverlay";
 
@@ -13,7 +14,7 @@ export default function LogWorkoutModal({ isOpen, onClose, onWorkoutLogged }) {
   // Fetch user's most recent weight
   const fetchUserWeight = async () => {
     try {
-      const res = await fetch("http://localhost:5000/progress", {
+      const res = await fetch("" + API_URL + "/progress", {
         credentials: "include",
       });
       const data = await res.json();
@@ -33,7 +34,7 @@ export default function LogWorkoutModal({ isOpen, onClose, onWorkoutLogged }) {
 
     async function loadTemplates() {
       try {
-        const res = await fetch("http://localhost:5000/workouts?is_template=true", {
+        const res = await fetch("" + API_URL + "/workouts?is_template=true", {
           credentials: "include",
         });
         const data = await res.json();
@@ -49,7 +50,7 @@ export default function LogWorkoutModal({ isOpen, onClose, onWorkoutLogged }) {
   // Load exercises for selected template
   const loadTemplateExercises = async (template) => {
     try {
-      const res = await fetch(`http://localhost:5000/workouts/${template.workout_id}/exercises`, {
+      const res = await fetch(`" + API_URL + "/workouts/${template.workout_id}/exercises`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -146,7 +147,7 @@ export default function LogWorkoutModal({ isOpen, onClose, onWorkoutLogged }) {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/workouts/log", {
+      const res = await fetch("" + API_URL + "/workouts/log", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
