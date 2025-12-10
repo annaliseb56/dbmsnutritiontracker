@@ -19,6 +19,9 @@ Full-stack web app for our DBMS project.
   - Vite
   - npm / Node.js
   - tailwindcss
+- **Dashboard**
+  - Python 3
+  - Streamlit
 
 ---
 
@@ -45,4 +48,9 @@ Running the Project:
 -Create a venv and do pip install -r requirements.txt
 -do flask run
 -cd frontend, npm run dev
+
+Running the Dashboard:
+
+-in the terminal, navigate to the dashboard directory
+-then use "streamlit run trainer_dashboard.py"
 
